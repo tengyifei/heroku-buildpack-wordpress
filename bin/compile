@@ -89,7 +89,7 @@ function fetch_package() {
         echo "Checksums match. Fetching from cache."
     fi
 
-    tar xzvf "$CACHE_DIR/package/${package}.tgz" -C "$location"
+    tar xzf "$CACHE_DIR/package/${package}.tgz" -C "$location"
 }
 
 echo "-----> Loading libs..."
@@ -113,11 +113,12 @@ if [ ! -d ./vendor/php ]; then
   curl --silent --max-time 60 --location $PHP_URL | tar xz
 fi
 
+cd ${BUILD_DIR}
 echo "Vendoring binaries into slug"
-mv /app/vendor/libmcrypt vendor/libmcrypt
-mv /app/vendor/libicu vendor/libicu
-mv /app/vendor/libmemcached vendor/libmemcached
-mv /app/vendor/php vendor/php
+mv /app/vendor/libmcrypt ./vendor/libmcrypt
+mv /app/vendor/libicu ./vendor/libicu
+mv /app/vendor/libmemcached ./vendor/libmemcached
+mv /app/vendor/php ./vendor/php
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
