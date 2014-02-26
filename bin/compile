@@ -114,11 +114,33 @@ if [ ! -d ./vendor/php ]; then
   curl --silent --max-time 60 --location $PHP_URL | tar xz
 fi
 
+status "Bundling extensions"
+echo "       apcu"
+fetch_package "ext/20121212/php-apcu" "/app/vendor/php" | indent
+echo "       phpredis"
+fetch_package "ext/20121212/php-redis" "/app/vendor/php" | indent
+echo "       mongo"
+fetch_package "ext/20121212/php-mongo" "/app/vendor/php" | indent
+echo "       memcached"
+fetch_package "ext/20121212/php-memcached" "/app/vendor/php" | indent
+
+cd ${BUILD_DIR}
+if [ -f /app/vendor/php/php.ini ]
+mv /app/vendor/php/php.ini ./vendor/php/php.ini
+for conf in $PHP_EXTRA_CONFIG; do
+    echo "$conf" >> "./vendor/php/etc/php.ini"
+done
+
+for include in $PHP_INCLUDES; do
+    cp "$BUILD_DIR/$include" "/app/vendor/php/etc/conf.d/"
+done
+
 cd ${BUILD_DIR}
 echo "Vendoring binaries into slug"
 mv /app/vendor/libmcrypt ./vendor/libmcrypt
 mv /app/vendor/libicu ./vendor/libicu
 mv /app/vendor/libmemcached ./vendor/libmemcached
+mv /app/vendor/php ./vendor/php
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
