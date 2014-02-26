@@ -125,9 +125,9 @@ echo "       memcached"
 fetch_package "ext/20121212/php-memcached" "/app/vendor/php" | indent
 
 cd ${BUILD_DIR}
-if [ -f /app/vendor/php/php.ini ]
-mv /app/vendor/php/php.ini ./vendor/php/php.ini
-echo "Copied php config"
+if [ -f /app/vendor/php/php.ini ]; then
+  mv /app/vendor/php/php.ini ./vendor/php/php.ini
+  echo "Copied php config"
 fi
 #for conf in $PHP_EXTRA_CONFIG; do
 #    echo "$conf" >> "./vendor/php/etc/php.ini"
