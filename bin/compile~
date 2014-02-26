@@ -92,7 +92,7 @@ function fetch_package() {
     tar xzf "$CACHE_DIR/package/${package}.tgz" -C "$location"
 }
 
-echo "Loading libs..."
+echo "-----> Loading libs..."
 fetch_package "libicu-51" /app/vendor/libicu
 fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt
 fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached

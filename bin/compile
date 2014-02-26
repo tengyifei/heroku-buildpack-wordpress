@@ -89,7 +89,7 @@ function fetch_package() {
         echo "Checksums match. Fetching from cache."
     fi
 
-    tar xzf "$CACHE_DIR/package/${package}.tgz" -C "$location"
+    tar xzvf "$CACHE_DIR/package/${package}.tgz" -C "$location"
 }
 
 echo "-----> Loading libs..."
