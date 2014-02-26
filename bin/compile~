@@ -116,13 +116,13 @@ fi
 
 echo "Bundling extensions"
 echo "       apcu"
-fetch_package "ext/20121212/php-apcu" "/app/vendor/php" | indent
+fetch_package "ext/20121212/php-apcu" "${BUILD_DIR}/vendor/php" | indent
 echo "       phpredis"
-fetch_package "ext/20121212/php-redis" "/app/vendor/php" | indent
+fetch_package "ext/20121212/php-redis" "${BUILD_DIR}/vendor/php" | indent
 echo "       mongo"
-fetch_package "ext/20121212/php-mongo" "/app/vendor/php" | indent
+fetch_package "ext/20121212/php-mongo" "${BUILD_DIR}/vendor/php" | indent
 echo "       memcached"
-fetch_package "ext/20121212/php-memcached" "/app/vendor/php" | indent
+fetch_package "ext/20121212/php-memcached" "${BUILD_DIR}/vendor/php" | indent
 
 cd ${BUILD_DIR}
 if [ -f /app/vendor/php/php.ini ]; then
@@ -142,7 +142,6 @@ echo "Vendoring binaries into slug"
 mv /app/vendor/libmcrypt ./vendor/libmcrypt
 mv /app/vendor/libicu ./vendor/libicu
 mv /app/vendor/libmemcached ./vendor/libmemcached
-mv /app/vendor/php ./vendor/php
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"

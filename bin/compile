@@ -124,11 +124,6 @@ fetch_package "ext/20121212/php-mongo" "${BUILD_DIR}/vendor/php" | indent
 echo "       memcached"
 fetch_package "ext/20121212/php-memcached" "${BUILD_DIR}/vendor/php" | indent
 
-cd ${BUILD_DIR}
-if [ -f /app/vendor/php/php.ini ]; then
-  mv /app/vendor/php/php.ini ./vendor/php/php.ini
-  echo "Copied php config"
-fi
 #for conf in $PHP_EXTRA_CONFIG; do
 #    echo "$conf" >> "./vendor/php/etc/php.ini"
 #done
@@ -158,6 +153,11 @@ cat >>bin/setup.sh <<EOF
 #!/usr/bin/env bash
 
 cp -rf /app/config/* /app
+
+if [ -f /app/vendor/php/php.ini ]; then
+  mv /app/vendor/php/php.ini /app/vendor/php/etc/php.ini
+  echo "Copied php config"
+fi
 
 cp /app/vendor/php/php/fpm/status.html /app/public/status.html
 cp /app/vendor/php/apc.php /app/public/apc.php
