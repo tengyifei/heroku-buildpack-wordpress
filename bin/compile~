@@ -43,7 +43,7 @@ fi
 # END CONFIG
 
 #
-NGINX_URL="https://s3.amazonaws.com/${S3_BUCKET}/package/nginx-${NGINX_VERSION}.tar.gz"
+NGINX_URL="https://s3.amazonaws.com/${S3_BUCKET}/nginx-${NGINX_VERSION}-heroku.tar.gz"
 PHP_URL="https://s3.amazonaws.com/${S3_BUCKET}/package/php-${PHP_VERSION}.tar.gz"
 WORDPRESS_URL="http://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"
 #
