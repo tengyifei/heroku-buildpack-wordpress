@@ -118,7 +118,6 @@ echo "Vendoring binaries into slug"
 mv /app/vendor/libmcrypt ./vendor/libmcrypt
 mv /app/vendor/libicu ./vendor/libicu
 mv /app/vendor/libmemcached ./vendor/libmemcached
-mv /app/vendor/php ./vendor/php
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
