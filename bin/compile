@@ -60,6 +60,43 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 mkdir -p $BUILD_DIR $CACHE_DIR
 
+mkdir -p "$CACHE_DIR/package"
+
+MCRYPT_VERSION="2.5.8"
+MEMCACHED_VERSION="1.0.18"
+
+function fetch_package() {
+    local package="$1"
+    local location="$2"
+
+    mkdir -p "$location"
+
+    local checksum_url="http://${S3_BUCKET}.s3.amazonaws.com/package/${package}.md5"
+    local package_url="http://${S3_BUCKET}.s3.amazonaws.com/package/${package}.tgz"
+    local checksum=$(curl "$checksum_url" 2> /dev/null)
+    local cache_checksum=
+
+    if [ -f "$CACHE_DIR/package/${package}.md5" ]; then
+        local cache_checksum=$(cat "$CACHE_DIR/package/${package}.md5")
+    fi
+
+    mkdir -p "$CACHE_DIR/package/$(dirname "$package")"
+
+    if [ "$cache_checksum" != "$checksum" ]; then
+        curl "$package_url" -L -s > "$CACHE_DIR/package/${package}.tgz"
+        echo "$checksum" > "$CACHE_DIR/package/${package}.md5"
+    else
+        echo "Checksums match. Fetching from cache."
+    fi
+
+    tar xzf "$CACHE_DIR/package/${package}.tgz" -C "$location"
+}
+
+
+fetch_package "libicu-51" /app/vendor/libicu > /dev/null
+fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt > /dev/null
+fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached > /dev/null
+
 # Nginx
 cd ${BUILD_DIR}
 if [ ! -d ./vendor/nginx ]; then
@@ -75,6 +112,12 @@ if [ ! -d ./vendor/php ]; then
   mkdir -p ./vendor/php && cd ./vendor/php
   curl --silent --max-time 60 --location $PHP_URL | tar xz
 fi
+
+status "Vendoring binaries into slug"
+mv /app/vendor/libmcrypt vendor/libmcrypt
+mv /app/vendor/libicu vendor/libicu
+mv /app/vendor/libmemcached vendor/libmemcached
+mv /app/vendor/php vendor/php
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
