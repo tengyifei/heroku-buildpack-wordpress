@@ -129,13 +129,13 @@ if [ -f /app/vendor/php/php.ini ]
 mv /app/vendor/php/php.ini ./vendor/php/php.ini
 echo "Copied php config"
 fi
-for conf in $PHP_EXTRA_CONFIG; do
-    echo "$conf" >> "./vendor/php/etc/php.ini"
-done
+#for conf in $PHP_EXTRA_CONFIG; do
+#    echo "$conf" >> "./vendor/php/etc/php.ini"
+#done
 
-for include in $PHP_INCLUDES; do
-    cp "$BUILD_DIR/$include" "/app/vendor/php/etc/conf.d/"
-done
+#for include in $PHP_INCLUDES; do
+#    cp "$BUILD_DIR/$include" "/app/vendor/php/etc/conf.d/"
+#done
 
 cd ${BUILD_DIR}
 echo "Vendoring binaries into slug"
