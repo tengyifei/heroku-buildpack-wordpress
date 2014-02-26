@@ -93,9 +93,9 @@ function fetch_package() {
 }
 
 
-fetch_package "libicu-51" /app/vendor/libicu > /dev/null
-fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt > /dev/null
-fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached > /dev/null
+fetch_package "libicu-51" /app/vendor/libicu
+fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt
+fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached
 
 # Nginx
 cd ${BUILD_DIR}
