@@ -74,7 +74,7 @@ function fetch_package() {
     local checksum_url="http://${S3_BUCKET}.s3.amazonaws.com/package/${package}.md5"
     local package_url="http://${S3_BUCKET}.s3.amazonaws.com/package/${package}.tgz"
     local checksum=$(curl "$checksum_url" 2> /dev/null)
-    local cache_checksum=
+    local cache_checksum=""
 
     if [ -f "$CACHE_DIR/package/${package}.md5" ]; then
         local cache_checksum=$(cat "$CACHE_DIR/package/${package}.md5")
@@ -92,7 +92,7 @@ function fetch_package() {
     tar xzf "$CACHE_DIR/package/${package}.tgz" -C "$location"
 }
 
-
+echo "-----> Loading libs..."
 fetch_package "libicu-51" /app/vendor/libicu
 fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt
 fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached
