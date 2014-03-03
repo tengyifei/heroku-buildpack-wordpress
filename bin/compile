@@ -97,6 +97,7 @@ echo "-----> Loading libs..."
 fetch_package "libicu-51" /app/vendor/libicu
 fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt
 fetch_package "libmemcached-${MEMCACHED_VERSION}" /app/vendor/libmemcached
+fetch_package "libsasl2" /app/vendor/libsasl2
 
 # Nginx
 cd ${BUILD_DIR}
@@ -139,6 +140,7 @@ echo "Vendoring binaries into slug"
 mv /app/vendor/libmcrypt ./vendor/libmcrypt
 mv /app/vendor/libicu ./vendor/libicu
 mv /app/vendor/libmemcached ./vendor/libmemcached
+mv /app/vendor/libsasl2 ./vendor/libsasl2
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
