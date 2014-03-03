@@ -123,6 +123,8 @@ echo "       mongo"
 fetch_package "ext/20121212/php-mongo" "${BUILD_DIR}/vendor/php" | indent
 echo "       memcached"
 fetch_package "ext/20121212/php-memcached" "${BUILD_DIR}/vendor/php" | indent
+echo "       igbinary"
+fetch_package "ext/20121212/php-igbinary" "${BUILD_DIR}/vendor/php" | indent
 
 #for conf in $PHP_EXTRA_CONFIG; do
 #    echo "$conf" >> "./vendor/php/etc/php.ini"
