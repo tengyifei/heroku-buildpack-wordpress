@@ -146,7 +146,7 @@ mv /app/vendor/libsasl2 ./vendor/libsasl2
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
 cd ${BUILD_DIR}
 curl --silent --max-time 60 --location $WORDPRESS_URL | tar xz
-mv wordpress public
+mv Wordpress-${WORDPRESS_VERSION} public
 
 echo "-----> Writing start.sh script"
 mkdir -p ${BUILD_DIR}/bin

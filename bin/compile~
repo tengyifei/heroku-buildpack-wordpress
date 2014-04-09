@@ -46,7 +46,7 @@ fi
 #NGINX_URL="https://s3.amazonaws.com/${S3_BUCKET}/package/nginx-${NGINX_VERSION}.tgz"
 NGINX_URL="https://s3.amazonaws.com/heroku-buildpack-wordpress/nginx-1.4.2-heroku.tar.gz"
 PHP_URL="https://s3.amazonaws.com/${S3_BUCKET}/package/php-${PHP_VERSION}.tgz"
-WORDPRESS_URL="http://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"
+WORDPRESS_URL="https://github.com/WordPress/WordPress/archive/${WORDPRESS_VERSION}.tar.gz"
 #
 
 function indent() {
